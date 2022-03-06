@@ -2,10 +2,10 @@ from django.shortcuts import render, get_object_or_404
 
 from .models import Post, Group
 
-
+COUNT_POSTS = 10
 # Самая главная страница
 def index(request):
-    posts = Post.objects.order_by('-pub_date')[:10]
+    posts = Post.objects.all()[:COUNT_POSTS]
     # В словаре context отправляем информацию в шаблон
     context = {
         'posts': posts,
@@ -16,7 +16,7 @@ def index(request):
 # Страница со списком мороженого
 def group_posts(request, slug):
     group = get_object_or_404(Group, slug=slug)
-    posts = Post.objects.filter(group=group).order_by('-pub_date')[:10]
+    posts = group.posts.all()[:COUNT_POSTS]
     context = {
         'group': group,
         'posts': posts,
