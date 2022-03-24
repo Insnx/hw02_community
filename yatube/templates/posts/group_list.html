@@ -2,7 +2,6 @@
 {% block title %}{{ group }}{% endblock title %}
 {% block content %}
       <!-- класс py-5 создает отступы сверху и снизу блока -->
-      <div class="container py-5">
         <h1>{{ group.title }}</h1>
         <p>
           {{ group.description }}
@@ -11,10 +10,14 @@
           <article>
             {% include './post.html' %}     
           </article>
+          <br>
+            <a href="{% url 'posts:post_detail' post.pk %}">подробная информация </a>
+          <br>
+            <a href="profile/{{post.author.name}}">все посты пользователя : {{ post.author.get_full_name }}</a>
+          <br>
           {% if not forloop.last %}<hr>{% endif %}
         {% endfor %}
-          <!-- под последним постом нет линии -->
-      </div>  
+          <!-- под последним постом нет линии --> 
 {% endblock content %}
 
       
