@@ -13,11 +13,11 @@
           <br>
             <a href="{% url 'posts:post_detail' post.pk %}">подробная информация </a>
           <br>
-            <a href="profile/{{post.author.name}}">все посты пользователя : {{ post.author.get_full_name }}</a>
+            <a href="{% url 'posts:profile' post.author %}">все посты пользователя : {{ post.author.get_full_name }}</a>
           <br>
           {% if not forloop.last %}<hr>{% endif %}
         {% endfor %}
-          <!-- под последним постом нет линии --> 
+        {% include 'posts/includes/paginator.html'  %}
 {% endblock content %}
 
       
